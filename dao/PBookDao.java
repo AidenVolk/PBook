@@ -62,7 +62,6 @@ public class PBookDao {
 		
 	}
 	
-    
 	public ArrayList<PBookVO> selectAll(){ // 연락처 목록 출력
 		ArrayList<PBookVO> pbList 	= new ArrayList<>();
 		Connection con 				= getConnection();
@@ -143,7 +142,7 @@ public class PBookDao {
 		}
 	}
 		
-	public static void selectByMnm(String mnm) {
+	public static void selectByMnm(String mnm) { // 회원 번호 검색
 		Connection con 				= getConnection();
 		PreparedStatement pstmt 	= null;
 		ResultSet rs 				= null;
@@ -191,7 +190,8 @@ public class PBookDao {
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
 		
-		sql.append("INSERT INTO PBookp(name"
+		sql.append("INSERT INTO PBookp(mnm"
+								  + ", name"
 								  + ", num"
 								  + ", location"
 								  + ", gpno)		");
@@ -261,7 +261,6 @@ public class PBookDao {
 		}
 	}
 			
-	
 	public static void updatePBook(PBookVO pbk) { //연락처 수정
 		
 		Connection con = getConnection();
@@ -269,7 +268,8 @@ public class PBookDao {
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append("UPDATE PBookf			");
-		sql.append("SET	   name				");
+		sql.append("SET	   mnm				");
+		sql.append("	 , name				");
 		sql.append("	 , num				");
 		sql.append("     , location			");
 		sql.append("	 , gpno				");
@@ -279,10 +279,11 @@ public class PBookDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, pbk.getName());
-			pstmt.setString(2, pbk.getNum());
-			pstmt.setString(3, pbk.getLocation());
-			pstmt.setString(4, pbk.getGpno());
+			pstmt.setString(1, pbk.getMnm());
+			pstmt.setString(2, pbk.getName());
+			pstmt.setString(3, pbk.getNum());
+			pstmt.setString(4, pbk.getLocation());
+			pstmt.setString(5, pbk.getGpno());
 			rowcnt = pstmt.executeUpdate();
 			if(rowcnt > 0) {
 				System.out.println("정상적으로 수정되었습니다.");
