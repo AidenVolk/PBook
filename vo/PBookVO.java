@@ -1,12 +1,19 @@
 package vo;
 
 public class PBookVO {
+	private String mnm			= null;
 	private String name 		= null;
 	private String num 			= null;
 	private String location 	= null;
 	private String gpno 		= null;
 	private String gpnm			= null;
 	
+	public String getMnm() {
+		return mnm;
+	}
+	public void setMnm(String mnm) {
+		this.mnm = mnm;
+	}
 	public String getName() {
 		return name;
 	}
@@ -40,7 +47,8 @@ public class PBookVO {
 	@Override
 	public String toString() {
 		
-		return "[이름= " + name
+		return "[회원번호= " + mnm
+				+ "이름= " + name
 				+ ", 전화번호= " + num
 				+ ", 주소= " + location
 				+ ", 그룹번호= " + gpno
