@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import vo.PBookVO;
 
 public class PBookDao {
-	private static Connection getConnection() {		// 컨넥션을 만들기 위한 URL주소,ID/PW 저장 메소드
+	private  Connection getConnection() { // 컨넥션을 만들기 위한 URL주소,ID/PW 저장 메소드
 		Connection con 	= null;
 		String url 		= "jdbc:oracle:thin:@localhost:1521:xe";
 		String user 	= "ora_user";
@@ -26,7 +26,7 @@ public class PBookDao {
 		return con;
 	}
 	
-	private static void close(Connection con, PreparedStatement pstmt, ResultSet rs) { // con,pstmt,rs 3가지 값이 파라미터로 입력된 경우의 닫기 
+	private  void close(Connection con, PreparedStatement pstmt, ResultSet rs) { // con,pstmt,rs 3가지 값이 파라미터로 입력된 경우의 닫기 
 		try {
 			if(rs != null) {
 				rs.close();
@@ -42,7 +42,7 @@ public class PBookDao {
 		}
 	}
 	
-	private static void close(Connection con, PreparedStatement pstmt) { // con, pstmt 2가지 의 파라미터 값이 들어왔을 경우의 닫기.
+	private  void close(Connection con, PreparedStatement pstmt) { // con, pstmt 2가지 의 파라미터 값이 들어왔을 경우의 닫기.
 		try {
 			if(pstmt != null) {
 				pstmt.close();
@@ -55,11 +55,10 @@ public class PBookDao {
 		}
 	}
 
-	public static void printPBook(ArrayList<PBookVO> pbList) { //ArrayList를 파라 미터로 받았을 때의 안의 내용 출력
+	public  void printPBook(ArrayList<PBookVO> pbList) { //ArrayList를 파라 미터로 받았을 때의 안의 내용 출력
 		for(int i = 0; i < pbList.size(); i++) {
 			System.out.println(pbList.get(i).toString()); //VO에 toString을 정의 해놓았기 때문에 VO.toString()의 형식대로 출력
 		}
-		
 	}
 	
 	public ArrayList<PBookVO> selectAll(){ // 연락처 목록 출력
@@ -101,7 +100,7 @@ public class PBookDao {
 		return pbList;
 	}
 	
-	public static void selectByName(String name) { // 이름  검색
+	public void selectByName(String name) { // 이름  검색
 		Connection con 				= getConnection();
 		PreparedStatement pstmt 	= null;
 		ResultSet rs 				= null;
@@ -142,7 +141,7 @@ public class PBookDao {
 		}
 	}
 		
-	public static void selectByMnm(String mnm) { // 회원 번호 검색
+	public  void selectByMnm(String mnm) { // 회원 번호 검색
 		Connection con 				= getConnection();
 		PreparedStatement pstmt 	= null;
 		ResultSet rs 				= null;
@@ -184,7 +183,7 @@ public class PBookDao {
 		}
 	}
 	
-	public static int insertPBook(PBookVO pbk) { // 신규연락처 추가
+	public  int insertPBook(PBookVO pbk) { // 신규연락처 추가
 		
 		Connection con = getConnection();
 		PreparedStatement pstmt = null;
@@ -221,20 +220,11 @@ public class PBookDao {
 		
 	}
 
-	public static int deletePBook(PBookVO pbk) { //연락처 삭제
+	public  int deletePBook(PBookVO pbk) { //연락처 삭제
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
 		
 		StringBuilder sql = new StringBuilder();
-		
-//		sql.append("DELETE PBookf (name"
-//				  + ", num"
-//				  + ", location"
-//				  + ", gpno)		");
-//		sql.append("	VALUES(?"
-//				   + ",?"
-//				   + ",?"
-//				   + ",?)			");
 		
 		sql.append("DELETE PBookf					");
 		sql.append("WHERE mnm = ?					");
@@ -247,11 +237,6 @@ public class PBookDao {
 			pstmt.setString(1, pbk.getMnm());
 			rowcnt = pstmt.executeUpdate();
 			
-			if(rowcnt > 0) {
-				System.out.println("삭제가 완료되었습니다.");
-			}else {
-				System.out.println("삭제가 완료되지 않았습니다.");
-			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -260,14 +245,14 @@ public class PBookDao {
 		return rowcnt;
 	}
 			// where절과  value쓰기
-	public static int updatePBook(PBookVO pbk) { //연락처 수정
+	public  int updatePBook(PBookVO pbk) { //연락처 수정
 		
 		Connection con = getConnection();
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append("UPDATE PBookf			");
-		sql.append("SET	   mnm				");
+		sql.append("   SET mnm				");
 		sql.append("	 , name				");
 		sql.append("	 , num				");
 		sql.append("     , location			");
@@ -277,8 +262,7 @@ public class PBookDao {
 		sql.append("		,?				");
 		sql.append("		,?				");
 		sql.append("		,?)				");
-		sql.append("WHERE					");
-		sql.append("						");
+		sql.append(" WHERE f.gpno = p.gpno	");
 		sql.append(";						");
 	
 		int rowcnt = 0;
@@ -291,11 +275,7 @@ public class PBookDao {
 			pstmt.setString(4, pbk.getLocation());
 			pstmt.setString(5, pbk.getGpno());
 			rowcnt = pstmt.executeUpdate();
-			if(rowcnt > 0) {
-				System.out.println("정상적으로 수정되었습니다.");
-			}else {
-				System.out.println("정상적으로 수정되지 않았습니다.");
-			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

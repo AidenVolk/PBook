@@ -9,10 +9,11 @@ import vo.PBookVO;
 
 
 
-public class PBookController {
-	PBookService pbsrv = new PBookService();
+public class PBookController { // PBooK에 최상위 class
 	private Scanner scanner = new Scanner(System.in);
-	PBookView pbview = new PBookView();
+	PBookService pbsrv 		= new PBookService();
+	PBookView pbv 			= new PBookView();
+	PBookVO pbk 			= new PBookVO();
 	
 	public void selectAll() {
 		ArrayList<PBookVO> pbList =  pbsrv.selectAll();
@@ -21,8 +22,65 @@ public class PBookController {
 		}
 	}
 	
+	public int insertPBook() {
+		pbsrv = new PBookService();
+		pbk = new PBookVO();
+		pbv = new PBookView();
+		
+		pbv.insertPBook_Mnm();
+		pbk.setMnm(scanner.nextLine());
+		pbv.insertPBooK_Name();
+		pbk.setName(scanner.nextLine());
+		pbv.insertPBooK_Num();
+		pbk.setNum(scanner.nextLine());
+		pbv.insertPBooK_Location();
+		pbk.setLocation(scanner.nextLine());
+		pbv.insertPBook_Group();
+		pbk.setGpno(scanner.nextLine());
+		
+		
+		int rowcnt = pbsrv.insertPBook(pbk);
+		
+		return rowcnt;
+	}
+	
+	public int deletePBook() {
+		pbsrv = new PBookService();
+		PBookVO pbk = new PBookVO();
+		
+		int rowcnt = pbsrv.deletePBook(pbk);
+		
+		return rowcnt;
+	}
+	
+	public int updatePBook() {
+		pbsrv = new PBookService();
+		pbv = new PBookView();
+		
+		int rowcnt = pbsrv.updatePBook(pbk);
+		
+		return rowcnt;
+
+	}
+	
+	public void selectByName() {
+		
+	}
+	
+	public void printMenu() {
+		
+	}
+	public static void main(String[] args) {
+
+		
+		
+	
+	}
+}
+
+
 //	public static void insertPBook() {
-		//----- 뷰
+//----- 뷰
 //		PBookVO pb = new PBookVO();
 //		System.out.println("");
 //		pb.setGpno("1");
@@ -40,40 +98,5 @@ public class PBookController {
 //		}else {
 //			System.out.println("정상적으로 추가되지 않았습니다.");
 //		}
-		//----- 뷰
+//----- 뷰
 //	}
-	public int insertPBook() {
-		pbsrv = new PBookService();
-		PBookVO pbk = new PBookVO();
-		
-		pbview.insertPBooK_Name();
-		pbk.setName(scanner.nextLine());
-		pbview.insertPBooK_Num();
-		pbview.insertPBooK_Location();
-		pbview.insertPBook_Group();
-		
-		PBookService pbsrv = new PBookService();
-		PBookVO pbk = new PBookVO();
-		
-		int rowcnt = pbsrv.insertPBook(pbk);
-		
-		return rowcnt;
-	}
-	
-	public int deletePBook() {
-//		PBookService pbsrv = new PBookService();
-		PBookVO pbk = new PBookVO();
-		
-		int rowcnt = pbsrv.deletePBook(pbk);
-		
-		return rowcnt;
-	}
-	
-
-	public static void main(String[] args) {
-		PBookService pbsrv = new PBookService();
-		
-		
-	
-	}
-}
