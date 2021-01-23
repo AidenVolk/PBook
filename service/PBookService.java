@@ -7,11 +7,36 @@ import vo.PBookVO;
 
 
 public class PBookService {
-	public void selectAll() { //전체 사원 출력
+	public ArrayList<PBookVO> selectAll() { //전체 사원 출력
 		PBookDao pbDao = new PBookDao();
 		ArrayList<PBookVO> pbList = pbDao.selectAll();
-		for(int i = 0; i < pbList.size(); i++) {
-			System.out.println(pbList.get(i));
-		}
+		return pbList;
+		
 	}
+	public static int insertPBook(PBookVO pbk) {
+//		pb.setMnm("1");
+//		pb.setGpnm("가족");
+		int rowcnt = PBookDao.insertPBook(pbk);
+		
+		return rowcnt;
+	}
+
+	public static int deletePBook(PBookVO pbk) {
+		
+		int rowcnt = PBookDao.deletePBook(pbk);
+		
+		return rowcnt;
+	}
+	
+	public static int updatePBook(PBookVO pbk) {
+		
+		int rowcnt = PBookDao.updatePBook(pbk);
+		
+		return rowcnt;
+	}
+	
+	
 }
+	
+	
+

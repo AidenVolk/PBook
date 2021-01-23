@@ -157,7 +157,7 @@ public class PBookDao {
 		sql.append("	 , p.gpnm				");
 		sql.append("  FROM PBookf f				");
 		sql.append("	 , PBOOkp p				");
-		sql.append(" WHERE f.name = ?			"); 
+		sql.append(" WHERE f.mnm = ?			"); 
 		sql.append("   AND f.gpno = p.gpno		");
 		
 		try {
@@ -184,7 +184,7 @@ public class PBookDao {
 		}
 	}
 	
-	public static void insertPBook(PBookVO pbk) { // 신규연락처 추가
+	public static int insertPBook(PBookVO pbk) { // 신규연락처 추가
 		
 		Connection con = getConnection();
 		PreparedStatement pstmt = null;
@@ -198,7 +198,8 @@ public class PBookDao {
 		sql.append("			VALUES(?"
 								   + ",?"
 								   + ",?"
-								   + ",?)			");
+								   + ",?"
+								   + ",?			");
 		
 		int rowcnt = 0;
 		
@@ -210,20 +211,17 @@ public class PBookDao {
 			pstmt.setString(4, pbk.getLocation());
 			pstmt.setString(5, pbk.getGpno());
 			rowcnt = pstmt.executeUpdate();
-			if(rowcnt > 0) {
-				System.out.println("정상적으로 추가되었습니다.");
-			}else {
-				System.out.println("정상적으로 추가되지 않았습니다.");
-			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(con, pstmt);
 		}
+		return rowcnt;
 		
 	}
 
-	public static void deletePBook(PBookVO pbk) { //연락처 삭제
+	public static int deletePBook(PBookVO pbk) { //연락처 삭제
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
 		
@@ -259,9 +257,10 @@ public class PBookDao {
 		}finally {
 			close(con, pstmt);
 		}
+		return rowcnt;
 	}
-			
-	public static void updatePBook(PBookVO pbk) { //연락처 수정
+			// where절과  value쓰기
+	public static int updatePBook(PBookVO pbk) { //연락처 수정
 		
 		Connection con = getConnection();
 		PreparedStatement pstmt = null;
@@ -273,6 +272,13 @@ public class PBookDao {
 		sql.append("	 , num				");
 		sql.append("     , location			");
 		sql.append("	 , gpno				");
+		sql.append("VALUES ( ?				");
+		sql.append("		,?				");
+		sql.append("		,?				");
+		sql.append("		,?				");
+		sql.append("		,?)				");
+		sql.append("WHERE					");
+		sql.append("						");
 		sql.append(";						");
 	
 		int rowcnt = 0;
@@ -295,6 +301,7 @@ public class PBookDao {
 		}finally {
 			close(con, pstmt);
 		}
+		return rowcnt;
 	
 	}
 }
