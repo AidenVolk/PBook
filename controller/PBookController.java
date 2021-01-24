@@ -14,7 +14,7 @@ public class PBookController { // PBooK에 최상위 class
 	private Scanner scanner 	= new Scanner(System.in);
 	PBookService pbsrv 			= new PBookService();
 	PBookView pbv 				= new PBookView();
-	PBookVO pbk 				= new PBookVO();
+	PBookVO pbvo 				= new PBookVO();
 	ArrayList<PBookVO> pbList	= new ArrayList<>(); 
 	
 	public void selectAll() {
@@ -26,32 +26,102 @@ public class PBookController { // PBooK에 최상위 class
 	}
 	
 	public int insertPBook() {
-		pbsrv = new PBookService();
-		pbk = new PBookVO();
-		pbv = new PBookView();
-		
-		pbv.insertPBook_Mnm();
-		pbk.setMnm(scanner.nextLine());
-		pbv.insertPBooK_Name();
-		pbk.setName(scanner.nextLine());
-		pbv.insertPBooK_Num();
-		pbk.setNum(scanner.nextLine());
-		pbv.insertPBooK_Location();
-		pbk.setLocation(scanner.nextLine());
-		pbv.insertPBook_Group();
-		pbk.setGpno(scanner.nextLine());
-		
-		
-		int rowcnt = pbsrv.insertPBook(pbk);
+		pbsrv 			= new PBookService();
+		pbvo 			= new PBookVO();
+		pbv 			= new PBookView();
+		String mnm 		= null;
+		String name 	= null;
+		String num 		= null;
+		String location = null;
+		String gpno 	= null;
+	
+		while(true) { // 회원번호 입력
+			pbv.insertPBook_Mnm();
+			mnm = scanner.nextLine();
+			if(mnm.isEmpty()) {
+				pbv.insertEmpty_Error();
+				continue;
+			}else if(mnm.equals("exit")) {
+				printMenu();
+			}else {
+				pbvo.setMnm(mnm);
+				break;
+			}
+		}
+		while(true) { // 이름 입력
+			pbv.insertPBooK_Name();
+			name = scanner.nextLine();
+			if(name.isEmpty()) { // 아무것도 입력하지 않은 에러
+				pbv.insertEmpty_Error();
+				continue;
+			}else if(name.equals("exit")) { // exit 입력시 메뉴로 탈출
+				printMenu();
+			}else if(name.length() <= 1){ // 이름 자리수가 1자리 입력시 에러
+				pbv.insertLessNum_Error();
+				continue;
+			}else {
+				pbvo.setName(name);
+				break;
+			 }
+		}
+		while(true) { // 번호 입력
+			pbv.insertPBooK_Num();
+			num = scanner.nextLine();
+			if(num.isEmpty()) {
+				pbv.insertEmpty_Error();
+				continue;
+			}else if(num.equals("exit")) {
+				printMenu();
+				
+			}else if(num.length() != 10 && num.length() != 11){
+				pbv.insertCountNum_Error();
+				continue;
+			}else {
+				pbvo.setNum(num);
+				break;
+			}
+		}
+		while(true) { // 주소 입력
+			pbv.insertPBooK_Location();
+			location = scanner.nextLine();
+			if(location.isEmpty()) {
+				pbv.insertEmpty_Error();
+				continue;
+			}else if(location.equals("exit")) {
+				printMenu();
+			}else {
+				pbvo.setLocation(location);
+				break;
+			}
+		}
+		while(true) { // 그룹 입력
+			pbv.insertPBook_Group();
+			gpno = scanner.nextLine();
+			if(gpno.isEmpty()) {
+				pbv.insertEmpty_Error();
+				continue;
+			}else if(gpno.equals("exit")) {
+				printMenu();
+			}else {
+				pbvo.setGpno(gpno);
+				break;
+			}
+		}
+
+		int rowcnt = pbsrv.insertPBook(pbvo);
 		
 		return rowcnt;
+	}
+
+	public void insertEmpty_Error() {
+		pbv.insertEmpty_Error();
 	}
 	
 	public int deletePBook() {
 		pbsrv 	= new PBookService();
-		pbk 	= new PBookVO();
+		pbvo 	= new PBookVO();
 		
-		int rowcnt = pbsrv.deletePBook(pbk);
+		int rowcnt = pbsrv.deletePBook(pbvo);
 		
 		return rowcnt;
 	}
@@ -60,7 +130,7 @@ public class PBookController { // PBooK에 최상위 class
 		pbsrv = new PBookService();
 		pbv = new PBookView();
 		
-		int rowcnt = pbsrv.updatePBook(pbk);
+		int rowcnt = pbsrv.updatePBook(pbvo);
 		
 		return rowcnt;
 
@@ -81,58 +151,78 @@ public class PBookController { // PBooK에 최상위 class
 	}
 	
 	public void printMenu() {
+		String kb = null;
+		
 		pbv.printMenu();
+		startMenu();
+		
+		while(true) {
+			kb = scanner.nextLine();
+			
+			if(kb.equals("1")) {
+				insertPBook();
+			}else if(kb.equals("2")) {
+				selectAll();
+			}else if(kb.equals("3")) {
+				updatePBook();
+			}else if(kb.equals("4")) {
+				deletePBook();
+			}else if(kb.equals("5")) {
+				exit();
+				break;
+			}else {
+				printMenu_Error();
+				continue;
+			}
+		}
 	}
 	
 	public void startMenu() {
 		pbv.startMenu();
 	}
-	public void startMenu_one() {
-		pbv.startMenu_one();
-	}
-	public void startMenu_two() {
-		pbv.startMenu_two();
-	}
-	public void startMenu_three() {
-		pbv.startMenu_three();
-	}
-	public void startMenu_four() {
-		pbv.startMenu_four();
-	}
-	public void startMenu_five() {
-		pbv.startMenu_five();
-	}
-	public void printError() {
-		pbv.printError();
-	}
-	
-	
-	
-	public static void main(String[] args) {
-		PBookController pbcon = new PBookController();
-		pbcon.scanner = new Scanner(System.in);
 
-		pbcon.printMenu();	
-		pbcon.startMenu();
-		pbcon.scanner.nextLine();
-		while(true) {
-			if(pbcon.scanner.nextLine() == "1") {
-				pbcon.startMenu_one();
-			}else if(pbcon.scanner.nextLine() == "2") {
-				pbcon.startMenu_two();
-			}else if(pbcon.scanner.nextLine() == "3") {
-				pbcon.startMenu_three();
-			}else if(pbcon.scanner.nextLine() == "4") {
-				pbcon.startMenu_four();
-			}else if(pbcon.scanner.nextLine() == "5") {
-				pbcon.startMenu_five();
-			}else {
-				pbcon.printError();
-			}
-			
-		}
-	
+	public void printMenu_Error() {
+		pbv.printMenu_Error();
 	}
+	public void exit() {
+		pbv.exit();
+	}
+	public void nobody() {
+		pbv.nobody();
+	}
+
+	
+	
+//	public static void main(String[] args) {
+//		PBookController pbcon 	= new PBookController();
+//		pbcon.scanner			= new Scanner(System.in);
+//		String kb 				= null;
+//		
+//		
+//		while(true) {
+//			pbcon.printMenu();
+//			pbcon.startMenu();
+//			kb = pbcon.scanner.nextLine();
+//			
+//			if(kb.equals("1")) {
+//				pbcon.insertPBook();
+//				
+//			}else if(kb.equals("2")) {
+//				pbcon.selectAll();
+//			}else if(kb.equals("3")) {
+//				pbcon.updatePBook();
+//			}else if(kb.equals("4")) {
+//				pbcon.deletePBook();
+//			}else if(kb.equals("5")) {
+//				pbcon.exit();
+//				break;
+//			}else {
+//				pbcon.printMenu_Error();
+//				continue;
+//			}
+//		}
+//		
+//	}
 }
 
 

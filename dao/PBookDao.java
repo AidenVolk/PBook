@@ -18,10 +18,10 @@ public class PBookDao {
 		
 		try { //URL,ID/PW 정상입력-> 로그인 성공 
 			con = DriverManager.getConnection(url,user,pw);
-			System.out.println("로그인 성공");
-		}catch(SQLException e) { // url,ID/PW 중 잘못 입력 또는 입력 오류로 인한 로그인 실패
+			System.out.println("DB 로그인 성공");
+		}catch(SQLException e) { // URL2,ID/PW 중 잘못 입력 또는 입력 오류로 인한 로그인 실패
 			e.printStackTrace();
-			System.out.println("로그인 실패");
+			System.out.println("DB 로그인 실패");
 		}
 		return con;
 	}
@@ -82,15 +82,14 @@ public class PBookDao {
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				PBookVO pbk = new PBookVO();
-				pbk.setMnm(rs.getString("mnm"));
-				pbk.setName(rs.getString("name"));
-				pbk.setNum(rs.getString("num"));
-				pbk.setLocation(rs.getString("location"));
-				pbk.setGpno(rs.getString("gpno"));
-				pbk.setGpnm(rs.getString("gpnm"));
+				PBookVO pbvo = new PBookVO();
+				pbvo.setMnm(rs.getString("mnm"));
+				pbvo.setName(rs.getString("name"));
+				pbvo.setNum(rs.getString("num"));
+				pbvo.setLocation(rs.getString("location"));
+				pbvo.setGpno(rs.getString("gpno"));
 			
-				pbList.add(pbk);
+				pbList.add(pbvo);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -123,13 +122,12 @@ public class PBookDao {
 			pstmt.setString(1,name);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				PBookVO pbk = new PBookVO();
-				pbk.setName(rs.getString("name"));
-				pbk.setNum(rs.getString("num"));
-				pbk.setLocation(rs.getString("location"));
-				pbk.setGpno(rs.getString("gpno"));
-				pbk.setGpnm(rs.getString("gpnm"));
-				pbList.add(pbk);
+				PBookVO pbvo = new PBookVO();
+				pbvo.setName(rs.getString("name"));
+				pbvo.setNum(rs.getString("num"));
+				pbvo.setLocation(rs.getString("location"));
+				pbvo.setGpno(rs.getString("gpno"));
+				pbList.add(pbvo);
 			}
 			printPBook(pbList); 
 	
@@ -165,14 +163,13 @@ public class PBookDao {
 			pstmt.setString(1, mnm);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				PBookVO pbk = new PBookVO();
-				pbk.setMnm(rs.getString("mnm"));
-				pbk.setName(rs.getString("name"));
-				pbk.setNum(rs.getString("num"));
-				pbk.setLocation(rs.getString("location"));
-				pbk.setGpno(rs.getString("gpno"));
-				pbk.setGpnm(rs.getString("gpnm"));
-				pbList.add(pbk);
+				PBookVO pbvo = new PBookVO();
+				pbvo.setMnm(rs.getString("mnm"));
+				pbvo.setName(rs.getString("name"));
+				pbvo.setNum(rs.getString("num"));
+				pbvo.setLocation(rs.getString("location"));
+				pbvo.setGpno(rs.getString("gpno"));
+				pbList.add(pbvo);
 			}
 			printPBook(pbList); 
 	
@@ -184,32 +181,33 @@ public class PBookDao {
 		}
 	}
 	
-	public  int insertPBook(PBookVO pbk) { // 신규연락처 추가
+	public  int insertPBook(PBookVO pbvo) { // 신규연락처 추가
 		
-		Connection con = getConnection();
+		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
-		StringBuilder sql = new StringBuilder();
-		
-		sql.append("INSERT INTO PBookp(mnm"
-								  + ", name"
-								  + ", num"
-								  + ", location"
-								  + ", gpno)		");
-		sql.append("			VALUES(?"
-								   + ",?"
-								   + ",?"
-								   + ",?"
-								   + ",?			");
+		StringBuilder sql 		= new StringBuilder();
+			
+		sql.append("INSERT INTO PBookp( mnm		");
+		sql.append("	              , name	");
+		sql.append("	              , num		");
+		sql.append("	  			  , location");
+		sql.append("	 			  , gpno)	");
+		sql.append("VALUES ( ?					");
+		sql.append("	   , ?					");
+		sql.append("	   , ?					");	
+		sql.append("	   , ?					");	
+		sql.append("	   , ?)					");	
+		sql.append(";	   						");	
 		
 		int rowcnt = 0;
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, pbk.getMnm());
-			pstmt.setString(2, pbk.getName());
-			pstmt.setString(3, pbk.getNum());
-			pstmt.setString(4, pbk.getLocation());
-			pstmt.setString(5, pbk.getGpno());
+			pstmt.setString(1, pbvo.getMnm());
+			pstmt.setString(2, pbvo.getName());
+			pstmt.setString(3, pbvo.getNum());
+			pstmt.setString(4, pbvo.getLocation());
+			pstmt.setString(5, pbvo.getGpno());
 			rowcnt = pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -221,7 +219,7 @@ public class PBookDao {
 		
 	}
 
-	public  int deletePBook(PBookVO pbk) { //연락처 삭제
+	public  int deletePBook(PBookVO pbvo) { //연락처 삭제
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
 		
@@ -235,7 +233,7 @@ public class PBookDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, pbk.getMnm());
+			pstmt.setString(1, pbvo.getMnm());
 			rowcnt = pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -246,7 +244,7 @@ public class PBookDao {
 		return rowcnt;
 	}
 			// where절과  value쓰기
-	public  int updatePBook(PBookVO pbk) { //연락처 수정
+	public  int updatePBook(PBookVO pbvo) { //연락처 수정
 		
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
@@ -270,11 +268,11 @@ public class PBookDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, pbk.getMnm());
-			pstmt.setString(2, pbk.getName());
-			pstmt.setString(3, pbk.getNum());
-			pstmt.setString(4, pbk.getLocation());
-			pstmt.setString(5, pbk.getGpno());
+			pstmt.setString(1, pbvo.getMnm());
+			pstmt.setString(2, pbvo.getName());
+			pstmt.setString(3, pbvo.getNum());
+			pstmt.setString(4, pbvo.getLocation());
+			pstmt.setString(5, pbvo.getGpno());
 			rowcnt = pstmt.executeUpdate();
 			
 		}catch(SQLException e) {

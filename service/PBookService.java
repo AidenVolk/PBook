@@ -20,25 +20,25 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		
 	}
 	
-	public int insertPBook(PBookVO pbk) {
+	public int insertPBook(PBookVO pbvo) {
 //		pb.setMnm("1");
 //		pb.setGpnm("가족");
 		
-		int rowcnt = pbDao.insertPBook(pbk);
+		int rowcnt = pbDao.insertPBook(pbvo);
 		
 		return rowcnt;
 	}
 
-	public int deletePBook(PBookVO pbk) {
+	public int deletePBook(PBookVO pbvo) {
 		
-		int rowcnt = pbDao.deletePBook(pbk);
+		int rowcnt = pbDao.deletePBook(pbvo);
 		
 		return rowcnt;
 	}
 	
-	public int updatePBook(PBookVO pbk) {
+	public int updatePBook(PBookVO pbvo) {
 		
-		int rowcnt = pbDao.updatePBook(pbk);
+		int rowcnt = pbDao.updatePBook(pbvo);
 		
 		return rowcnt;
 	}
@@ -47,6 +47,7 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		
 	}
 	
+
 	
 	public ArrayList<PBookVO> selectByName(String name) {
 		
