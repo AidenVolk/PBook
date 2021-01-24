@@ -100,7 +100,7 @@ public class PBookDao {
 		return pbList;
 	}
 	
-	public void selectByName(String name) { // 이름  검색
+	public ArrayList<PBookVO> selectByName(String name) { // 이름  검색
 		Connection con 				= getConnection();
 		PreparedStatement pstmt 	= null;
 		ResultSet rs 				= null;
@@ -120,7 +120,7 @@ public class PBookDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, name);
+			pstmt.setString(1,name);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				PBookVO pbk = new PBookVO();
@@ -139,6 +139,7 @@ public class PBookDao {
 			close(con, pstmt, rs);
 			
 		}
+		return pbList;
 	}
 		
 	public  void selectByMnm(String mnm) { // 회원 번호 검색
@@ -247,9 +248,9 @@ public class PBookDao {
 			// where절과  value쓰기
 	public  int updatePBook(PBookVO pbk) { //연락처 수정
 		
-		Connection con = getConnection();
+		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
-		StringBuilder sql = new StringBuilder();
+		StringBuilder sql 		= new StringBuilder();
 		
 		sql.append("UPDATE PBookf			");
 		sql.append("   SET mnm				");

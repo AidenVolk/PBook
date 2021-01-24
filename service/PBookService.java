@@ -8,9 +8,12 @@ import vo.PBookVO;
 
 public class PBookService { // Controller class 와 Dao의 중간다리 역할 class
 	PBookDao pbDao = new PBookDao();
+	ArrayList<PBookVO> pbList = new ArrayList<>();
+	
 	
 	public ArrayList<PBookVO> selectAll() { //전체 사원 출력
-		pbDao = new PBookDao();
+		pbDao 	= new PBookDao();
+		pbList 	= new ArrayList<>();
 		
 		ArrayList<PBookVO> pbList = pbDao.selectAll();
 		return pbList;
@@ -40,12 +43,16 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		return rowcnt;
 	}
 	
+	public void printMenu() {
+		
+	}
 	
-	public String selectByName(String name) {
+	
+	public ArrayList<PBookVO> selectByName(String name) {
 		
-//		String sbn = pbDao.selectByName(); ///파라미터에 어떤 값을 넣어주어야할지 잘 모르곘음
+		pbList = pbDao.selectByName(name);
 		
-		return name;
+		return pbList;
 	}
 	
 }
