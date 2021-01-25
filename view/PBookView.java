@@ -9,20 +9,21 @@ public class PBookView { // 화면 출력을 위한 class
 	PBookVO pbvo 				= new PBookVO();
 	ArrayList<PBookVO> pbList 	= new ArrayList<>(); 
 	
-	public int insertPBook_Result() {
-		pbvo = new PBookVO();
-		PBookController pbcon = new PBookController();
+	
+	public void insertPBook_Result() {
+		pbvo 					= new PBookVO();
+		PBookController pbcon 	= new PBookController();
 		
-		int rowcnt = pbcon.insertPBook_Result();
+		int rowcnt = pbcon.insertPBook();
 		
 		if(rowcnt > 0) {
 			System.out.println("추가가 완료되었습니다.");
 		}else {
 			System.out.println("추가 오류");
 		}
-		return rowcnt;
+		
 	}
-	public int deletePBook_Result() {
+	public void deletePBook_Result() {
 		pbvo 					= new PBookVO();
 		PBookController pbcon  	= new PBookController();
 		

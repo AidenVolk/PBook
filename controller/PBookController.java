@@ -65,6 +65,11 @@ public class PBookController { // PBooK에 최상위 class
 		System.out.println("전화번호 자리수가 길거나 적습니다.(10-11자리 입력 필요)");
 		System.out.println();
 	}
+	public void insertGroup_Error() {
+		System.out.println();
+		System.out.println("1,2,3 중 하나를 택해야합니다.");
+		System.out.println();
+	}
 	
 	
 	public int insertPBook_Result(){
@@ -73,7 +78,14 @@ public class PBookController { // PBooK에 최상위 class
 		return rowcnt;
 	}
 	
-	public void insertPBook() {
+	public int insertPBook() {
+		PBookService pbsrv = new PBookService();
+		pbv = new PBookView();
+		
+		int rowcnt = pbsrv.insertPBook();
+		
+		return rowcnt;
+	
 		
 	}
 	
@@ -146,6 +158,8 @@ public class PBookController { // PBooK에 최상위 class
 		
 		pbsrv.printMenu();
 	}
+	
+	
 	
 	public void printMenu_Error() {
 		System.out.println();

@@ -10,21 +10,25 @@ import vo.PBookVO;
 
 
 public class PBookService { // Controller class 와 Dao의 중간다리 역할 class
-	private Scanner scanner = new Scanner(System.in);
-	PBookDao pbdao = new PBookDao();
-	
-	ArrayList<PBookVO> pblist = new ArrayList<>();
-	PBookVO pbvo = new PBookVO();
+	private Scanner scanner 	= new Scanner(System.in);
+	PBookDao pbdao 				= new PBookDao();
+	ArrayList<PBookVO> pbList 	= new ArrayList<>();
+	PBookVO pbvo 				= new PBookVO();
 	
 	public ArrayList<PBookVO> selectAll() { //전체 사원 출력
 		pbdao 	= new PBookDao();
-		pblist 	= new ArrayList<>();
+		pbList 	= new ArrayList<>();
 		
 		ArrayList<PBookVO> pbList = pbdao.selectAll();
-		return pbList;
 		
-	}
-	
+		System.out.println();
+		System.out.println("전체 목록을 표시합니다");
+		System.out.println();
+		for(int i = 0; i < pbList.size(); i++) {
+			System.out.println(pbList.get(i));
+		}
+		return pbList;
+	}	
 
 	public int insertPBook() {
 		pbvo 					= new PBookVO();
@@ -102,14 +106,26 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 				continue;
 			}else if(gpno.equals("exit")) {
 				printMenu();
-			}else {
+			}else if(gpno.equals("1")) {
 				pbvo.setGpno(gpno);
 				break;
+			}else if(gpno.equals("2")) {
+				pbvo.setGpno(gpno);
+				break;
+			}else if(gpno.equals("3")) {
+				pbvo.setGpno(gpno);
+				break;
+			}else {
+				pbcon.insertGroup_Error();
 			}
 		}
+		
 		int rowcnt = pbdao.insertPBook(pbvo);
+
+		pbcon.insertPBook();
 		
 		return rowcnt;
+		
 	}
 
 	public int insertPBook_Result() {
@@ -182,7 +198,7 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 	
 	public ArrayList<PBookVO> selectByName(String name) {
 //		pblist = pbdao.selectByName(name);
-		pblist = new ArrayList<>();
+		pbList = new ArrayList<>();
 
 //		String name = null;
 		
@@ -193,7 +209,7 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		
 		
 		
-		return pblist;
+		return pbList;
 		
 		
 	}

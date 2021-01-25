@@ -18,10 +18,14 @@ public class PBookDao {
 		
 		try { //URL,ID/PW 정상입력-> 로그인 성공 
 			con = DriverManager.getConnection(url,user,pw);
+			System.out.println();
 			System.out.println("DB 로그인 성공");
+			System.out.println();
 		}catch(SQLException e) { // URL2,ID/PW 중 잘못 입력 또는 입력 오류로 인한 로그인 실패
 			e.printStackTrace();
+			System.out.println();
 			System.out.println("DB 로그인 실패");
+			System.out.println();
 		}
 		return con;
 	}
