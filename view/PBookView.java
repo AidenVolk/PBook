@@ -3,25 +3,24 @@ package view;
 import java.util.ArrayList;
 
 import controller.PBookController;
-import service.PBookService;
 import vo.PBookVO;
 
 public class PBookView { // 화면 출력을 위한 class
 	PBookVO pbvo 				= new PBookVO();
-	PBookService pbsrv 			= new PBookService();
 	ArrayList<PBookVO> pbList 	= new ArrayList<>(); 
 	
-	
-	public void insertPBook_result() {
+	public int insertPBook_result() {
 		pbvo = new PBookVO();
+		PBookController pbcon = new PBookController();
 		
-		int rowcnt = pbsrv.insertPBook(pbvo);
+		int rowcnt = pbcon.insertPBook_result();
 		
 		if(rowcnt > 0) {
 			System.out.println("추가가 완료되었습니다.");
 		}else {
 			System.out.println("추가 오류");
 		}
+		return rowcnt;
 	}
 	
 	
@@ -62,9 +61,10 @@ public class PBookView { // 화면 출력을 위한 class
 		System.out.println();
 	}
 	public void deletePBook_Result() {
-		pbvo = new PBookVO();
+		pbvo 					= new PBookVO();
+		PBookController pbcon  	= new PBookController();
 		
-		int rowcnt = pbsrv.deletePBook(pbvo);
+		int rowcnt = pbcon.deletePBook_reult();
 		
 		if(rowcnt > 0) {
 			System.out.println("삭제가 완료되었습니다.");
@@ -74,8 +74,9 @@ public class PBookView { // 화면 출력을 위한 class
 	}
 	
 	public void updatePBook_result() {
+		PBookController pbcon  = new PBookController();
 		
-		int rowcnt = pbsrv.updatePBook(pbvo);
+		int rowcnt = pbcon.updatePBook_result();
 		
 		if(rowcnt > 0) {
 			System.out.println("정상적으로 수정되었습니다.");
@@ -112,10 +113,9 @@ public class PBookView { // 화면 출력을 위한 class
 		System.out.println("-------------");
 		System.out.println("5. 프로그램 종료 ");
 		System.out.println("-------------");
-	}
-	public void startMenu() {
 		System.out.println("원하시는 번호를 입력하세요(1-5)");
 	}
+
 	public void exit() {
 		System.out.println("프로그램을 종료합니다");
 		System.out.println();

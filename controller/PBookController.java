@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 import service.PBookService;
@@ -11,174 +10,121 @@ import vo.PBookVO;
 
 
 public class PBookController { // PBooK에 최상위 class
-	private Scanner scanner 	= new Scanner(System.in);
-	PBookService pbsrv 			= new PBookService();
-	PBookView pbv 				= new PBookView();
-	PBookVO pbvo 				= new PBookVO();
-	ArrayList<PBookVO> pbList	= new ArrayList<>(); 
+	PBookView pbv 	= new PBookView();
 	
 	public void selectAll() {
-		pbv 	= new PBookView();
-		pbsrv 	= new PBookService();
-	
-		pbv.selectAll(pbList);
-		pbsrv.selectAll();
+//		pbv 	= new PBookView();
+//		pbsrv 	= new PBookService();
+//	
+//		pbv.selectAll(pbList);
+//		pbsrv.selectAll();
 	}
 	
-	public int insertPBook() {
-		pbsrv 			= new PBookService();
-		pbvo 			= new PBookVO();
-		pbv 			= new PBookView();
-		String mnm 		= null;
-		String name 	= null;
-		String num 		= null;
-		String location = null;
-		String gpno 	= null;
-	
-		while(true) { // 회원번호 입력
-			pbv.insertPBook_Mnm();
-			mnm = scanner.nextLine();
-			if(mnm.isEmpty()) {
-				pbv.insertEmpty_Error();
-				continue;
-			}else if(mnm.equals("exit")) {
-				printMenu();
-			}else {
-				pbvo.setMnm(mnm);
-				break;
-			}
-		}
-		while(true) { // 이름 입력
-			pbv.insertPBooK_Name();
-			name = scanner.nextLine();
-			if(name.isEmpty()) { // 아무것도 입력하지 않은 에러
-				pbv.insertEmpty_Error();
-				continue;
-			}else if(name.equals("exit")) { // exit 입력시 메뉴로 탈출
-				printMenu();
-			}else if(name.length() <= 1){ // 이름 자리수가 1자리 입력시 에러
-				pbv.insertLessNum_Error();
-				continue;
-			}else {
-				pbvo.setName(name);
-				break;
-			 }
-		}
-		while(true) { // 번호 입력
-			pbv.insertPBooK_Num();
-			num = scanner.nextLine();
-			if(num.isEmpty()) {
-				pbv.insertEmpty_Error();
-				continue;
-			}else if(num.equals("exit")) {
-				printMenu();
-				
-			}else if(num.length() != 10 && num.length() != 11){
-				pbv.insertCountNum_Error();
-				continue;
-			}else {
-				pbvo.setNum(num);
-				break;
-			}
-		}
-		while(true) { // 주소 입력
-			pbv.insertPBooK_Location();
-			location = scanner.nextLine();
-			if(location.isEmpty()) {
-				pbv.insertEmpty_Error();
-				continue;
-			}else if(location.equals("exit")) {
-				printMenu();
-			}else {
-				pbvo.setLocation(location);
-				break;
-			}
-		}
-		while(true) { // 그룹 입력
-			pbv.insertPBook_Group();
-			gpno = scanner.nextLine();
-			if(gpno.isEmpty()) {
-				pbv.insertEmpty_Error();
-				continue;
-			}else if(gpno.equals("exit")) {
-				printMenu();
-			}else {
-				pbvo.setGpno(gpno);
-				break;
-			}
-		}
-
-		int rowcnt = pbsrv.insertPBook(pbvo);
-		
-		return rowcnt;
+	public void insertPBook_PrintMnm() {
+		pbv.insertPBook_Mnm();
 	}
-
+	public void insertPBook_PrintName() {
+		pbv.insertPBooK_Name();
+	}
+	public void insertPBook_PrintNum() {
+		pbv.insertPBooK_Num();
+	}
+	public void insertPBook_PrintLocation() {
+		pbv.insertPBooK_Location();
+	}
+	public void insertPBook_PrintGroup() {
+		pbv.insertPBook_Group();
+	}
+	
+	public void insertPBook_EmptyError() {
+		pbv.insertEmpty_Error();
+	}
 	public void insertEmpty_Error() {
 		pbv.insertEmpty_Error();
 	}
+	public void insertLessNum_Error() {
+		pbv.insertLessNum_Error();
+	}
+	public void insertCountNum_Error() {
+		pbv.insertCountNum_Error();
+	}
 	
-	public int deletePBook() {
-		pbsrv 	= new PBookService();
-		pbvo 	= new PBookVO();
-		
-		int rowcnt = pbsrv.deletePBook(pbvo);
+	
+	public int insertPBook_result(){
+		int rowcnt = pbv.insertPBook_result();
 		
 		return rowcnt;
 	}
 	
-	public int updatePBook() {
-		pbsrv = new PBookService();
-		pbv = new PBookView();
+	public void insertPBook() {
+		PBookService pbsrv = new PBookService();
 		
-		int rowcnt = pbsrv.updatePBook(pbvo);
-		
-		return rowcnt;
-
+		pbsrv.insertPBook();
 	}
 	
+	public int inserPBook_Result() {
+		PBookService pbsrv = new PBookService();
+		
+		int rowcnt = pbsrv.insertPBook_Result();
+	
+		return rowcnt;
+	}
+	
+	
+	public void deletePBook() {
+		
+	}
+	
+	public int deletePBook_reult() {
+		PBookService pbsrv = new PBookService();
+		
+		int rowcnt = pbsrv.deletePBook_result();
+		
+		return rowcnt;
+	}
+	public void updatePBook() {
+//		pbsrv = new PBookService();
+//		pbv = new PBookView();
+//		
+//		int rowcnt = pbsrv.updatePBook(pbvo);
+//		
+//		return rowcnt;
+	}
+	
+	public int updatePBook_result() {
+		PBookService pbsrv = new PBookService();
+		
+		int rowcnt = pbsrv.updatePBook_result();
+		
+		return rowcnt;
+	}
 	public ArrayList<PBookVO> selectByName() {
-		pbList = new ArrayList<>();
-		pbsrv = new PBookService();
-		String name = null;
-		
-		//view에서 검색할 이름 출력하도록 가져오기
-		name = scanner.nextLine();
-		pbList = pbsrv.selectByName(name);
-		
-		return pbList;
-		
-		
+//		pblist = new ArrayList<>();
+//		pbsrv = new PBookService();
+//		String name = null;
+//		
+//		//view에서 검색할 이름 출력하도록 가져오기
+//		name = scanner.nextLine();
+//		pbList = pbsrv.selectByName(name);
+//		
+//		return pbList;
+//		
+//		
 	}
 	
-	public void printMenu() {
-		String kb = null;
-		
-		pbv.printMenu();
-		startMenu();
-		
-		while(true) {
-			kb = scanner.nextLine();
-			
-			if(kb.equals("1")) {
-				insertPBook();
-			}else if(kb.equals("2")) {
-				selectAll();
-			}else if(kb.equals("3")) {
-				updatePBook();
-			}else if(kb.equals("4")) {
-				deletePBook();
-			}else if(kb.equals("5")) {
-				exit();
-				break;
-			}else {
-				printMenu_Error();
-				continue;
-			}
-		}
-	}
-	
-	public void startMenu() {
-		pbv.startMenu();
+	public void printMenu(){
+		System.out.println("-------------");
+		System.out.println("1. 회원추가        ");
+		System.out.println("-------------");
+		System.out.println("2. 회원 목록       ");
+		System.out.println("-------------");
+		System.out.println("3. 연락처 수정    ");
+		System.out.println("-------------");
+		System.out.println("4. 회원 삭제       ");
+		System.out.println("-------------");
+		System.out.println("5. 프로그램 종료 ");
+		System.out.println("-------------");
+		System.out.println("원하시는 번호를 입력하세요(1-5)");
 	}
 
 	public void printMenu_Error() {
