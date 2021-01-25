@@ -126,7 +126,12 @@ public class PBookController { // PBooK에 최상위 class
 		System.out.println("-------------");
 		System.out.println("원하시는 번호를 입력하세요(1-5)");
 	}
-
+	public void start() {
+		PBookService pbsrv = new PBookService();
+		
+		pbsrv.printMenu();
+	}
+	
 	public void printMenu_Error() {
 		pbv.printMenu_Error();
 	}

@@ -11,7 +11,7 @@ public class Main {
 		PBookController pbcon = new PBookController();
 		
 		
-		pbcon.printMenu();
+		pbcon.start();
 	}
 
 }

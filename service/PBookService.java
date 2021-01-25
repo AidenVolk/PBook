@@ -150,6 +150,7 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		
 		while(true) {
 			pbcon.printMenu();
+			
 			String kb = scanner.nextLine();
 			
 			if(kb.equals("1")) {
