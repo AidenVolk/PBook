@@ -92,6 +92,7 @@ public class PBookDao {
 				pbvo.setNum(rs.getString("num"));
 				pbvo.setLocation(rs.getString("location"));
 				pbvo.setGpno(rs.getString("gpno"));
+				pbvo.setGpnm(rs.getString("gpnm"));
 			
 				pbList.add(pbvo);
 			}
@@ -259,7 +260,6 @@ public class PBookDao {
 		sql.append("		,?)				");
 		sql.append(" WHERE f.gpno = p.gpno	");
 		sql.append("   AND f.mnm = ?	 	");
-		sql.append(";						");
 	
 		int rowcnt = 0;
 		

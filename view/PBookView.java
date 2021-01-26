@@ -21,7 +21,7 @@ public class PBookView { // 화면 출력을 위한 class
 		
 	}
 	public void deletePBook_Result(int rowcnt) {
-		pbvo 					= new PBookVO();
+		pbvo = new PBookVO();
 		
 		if(rowcnt > 0) {
 			System.out.println("삭제가 완료되었습니다.");

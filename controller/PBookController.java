@@ -9,6 +9,7 @@ import view.PBookView;
 
 public class PBookController { // PBooK에 최상위 class
 	PBookView pbv 	= new PBookView();
+	PBookService pbsrv = new PBookService();
 	
 	public void selectAll() {
 //		pbv 	= new PBookView();
@@ -69,6 +70,12 @@ public class PBookController { // PBooK에 최상위 class
 		System.out.println();
 	}
 
+	public void deletePBook() {
+		int rowcnt = pbsrv.deletePBook();
+		
+		pbv.deletePBook_Result(rowcnt);
+	}
+	
 	public void start() {
 	PBookService pbsrv = new PBookService();
 	
