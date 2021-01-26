@@ -47,13 +47,13 @@ public class PBookView { // 화면 출력을 위한 class
 		}
 	}
 	
-	public void selectByName() {
-		PBookController pbcon = new PBookController();
-		pbList = new ArrayList<>();
-		ArrayList<PBookVO> pbList = pbcon.selectByName();
-		System.out.println(pbList);
-		
-	}
+//	public void selectByName() {
+//		PBookController pbcon = new PBookController();
+//		pbList = new ArrayList<>();
+//		ArrayList<PBookVO> pbList = pbcon.selectByName();
+//		System.out.println(pbList);
+//		
+//	}
 	
 	public void selectAll(ArrayList<PBookVO> pbList) {
 	

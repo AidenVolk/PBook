@@ -1,11 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
 
 
 import service.PBookService;
 import view.PBookView;
-import vo.PBookVO;
 
 
 
@@ -99,7 +97,7 @@ public class PBookController { // PBooK에 최상위 class
 	
 
 	
-	public ArrayList<PBookVO> selectByName() {
+//	public ArrayList<PBookVO> selectByName() {
 //		pblist = new ArrayList<>();
 //		pbsrv = new PBookService();
 //		String name = null;
@@ -109,7 +107,7 @@ public class PBookController { // PBooK에 최상위 class
 //		pbList = pbsrv.selectByName(name);
 //		
 //		return pbList;
-	}
+//	}
 	
 	public void start() {
 		PBookService pbsrv = new PBookService();
