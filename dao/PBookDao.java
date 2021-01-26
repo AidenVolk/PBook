@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import service.PBookService;
 import vo.PBookVO;
 
 public class PBookDao {
@@ -186,12 +187,12 @@ public class PBookDao {
 	}
 	
 	public  int insertPBook(PBookVO pbvo) { // 신규연락처 추가
-		
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
 		StringBuilder sql 		= new StringBuilder();
+		int rowcnt = 0;
 			
-		sql.append("INSERT INTO PBookp( mnm		");
+		sql.append("INSERT INTO PBookf( mnm		");
 		sql.append("	              , name	");
 		sql.append("	              , num		");
 		sql.append("	  			  , location");
@@ -201,9 +202,6 @@ public class PBookDao {
 		sql.append("	   , ?					");	
 		sql.append("	   , ?					");	
 		sql.append("	   , ?)					");	
-		sql.append(";	   						");	
-		
-		int rowcnt = 0;
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
@@ -266,6 +264,7 @@ public class PBookDao {
 		sql.append("		,?				");
 		sql.append("		,?)				");
 		sql.append(" WHERE f.gpno = p.gpno	");
+		sql.append("   AND f.name = ?	 	");
 		sql.append(";						");
 	
 		int rowcnt = 0;

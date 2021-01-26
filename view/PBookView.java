@@ -10,11 +10,11 @@ public class PBookView { // 화면 출력을 위한 class
 	ArrayList<PBookVO> pbList 	= new ArrayList<>(); 
 	
 	
-	public void insertPBook_Result() {
+	public void insertPBook_Result(int rowcnt) {
 		pbvo 					= new PBookVO();
 		PBookController pbcon 	= new PBookController();
 		
-		int rowcnt = pbcon.insertPBook();
+		pbcon.insertPBook_Result();
 		
 		if(rowcnt > 0) {
 			System.out.println("추가가 완료되었습니다.");
@@ -23,11 +23,11 @@ public class PBookView { // 화면 출력을 위한 class
 		}
 		
 	}
-	public void deletePBook_Result() {
+	public void deletePBook_Result(int rowcnt) {
 		pbvo 					= new PBookVO();
 		PBookController pbcon  	= new PBookController();
 		
-		int rowcnt = pbcon.deletePBook_Result();
+		pbcon.deletePBook_Result();
 		
 		if(rowcnt > 0) {
 			System.out.println("삭제가 완료되었습니다.");
@@ -35,11 +35,10 @@ public class PBookView { // 화면 출력을 위한 class
 			System.out.println("삭제 오류");
 		}
 	}
-	
-	public void updatePBook_result() {
+	public void updatePBook_Result(int rowcnt) {
 		PBookController pbcon  = new PBookController();
 		
-		int rowcnt = pbcon.updatePBook_result();
+		pbcon.updatePBook_result();
 		
 		if(rowcnt > 0) {
 			System.out.println("정상적으로 수정되었습니다.");
@@ -62,21 +61,6 @@ public class PBookView { // 화면 출력을 위한 class
 		for(int i = 0; i < pbList.size(); i++) {
 			System.out.println(pbList.get(i));
 		}
-	}
-	
-	public void printMenu() {
-		System.out.println("-------------");
-		System.out.println("1. 회원추가        ");
-		System.out.println("-------------");
-		System.out.println("2. 회원 목록       ");
-		System.out.println("-------------");
-		System.out.println("3. 연락처 수정    ");
-		System.out.println("-------------");
-		System.out.println("4. 회원 삭제       ");
-		System.out.println("-------------");
-		System.out.println("5. 프로그램 종료 ");
-		System.out.println("-------------");
-		System.out.println("원하시는 번호를 입력하세요(1-5)");
 	}
 	
 	public void rightState(int rowcnt) {
