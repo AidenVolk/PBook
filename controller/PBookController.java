@@ -80,12 +80,12 @@ public class PBookController { // PBooK에 최상위 class
 		
 		
 	}
-	public int deletePBook_Result() {
-		PBookService pbsrv = new PBookService();
-		
-		int rowcnt = pbsrv.deletePBooK_Result();
-		
-		return rowcnt;
+	public void deletePBook_Result() {
+		PBookService pbsrv 	= new PBookService();
+		int rowcnt 			= pbsrv.deletePBook();
+
+		pbv.deletePBook_Result(rowcnt);
+
 	}
 	public int updatePBook_result() {
 		PBookService pbsrv = new PBookService();

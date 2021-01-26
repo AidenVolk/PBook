@@ -141,18 +141,18 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		kb = scanner.nextLine();
 		//selectByName(kb);
 		
-		
-		
-		int rowcnt = pbdao.deletePBook(pbvo);
-		
-		return rowcnt;
-	}
-	public int deletePBooK_Result() {
-		int rowcnt = pbdao.deletePBook(pbvo);
+		int rowcnt = pbdao.deletePBook(kb);
 		
 		return rowcnt;
 		
+		
 	}
+//	public int deletePBooK_Result() {
+//		int rowcnt = pbdao.deletePBook(pbvo);
+//		
+//		return rowcnt;
+//		
+//	}
 	public int updatePBook() {
 		
 		int rowcnt = pbdao.updatePBook(pbvo);

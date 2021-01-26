@@ -145,7 +145,7 @@ public class PBookDao {
 		return pbList;
 	}
 		
-	public  PBooKVO selectByMnm(String mnm) { // 회원 번호 검색
+	public  String selectByMnm(String mnm) { // 회원 번호 검색
 		Connection con 				= getConnection();
 		PreparedStatement pstmt 	= null;
 		ResultSet rs 				= null;
@@ -219,7 +219,7 @@ public class PBookDao {
 		
 	}
 
-	public  int deletePBook(PBookVO pbvo) { //연락처 삭제
+	public  int deletePBook(String mnm) { //연락처 삭제
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
 		int rowcnt 				= 0;
@@ -232,7 +232,7 @@ public class PBookDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, pbvo.getMnm());
+			pstmt.setString(1, mnm);
 			rowcnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
