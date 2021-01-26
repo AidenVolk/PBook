@@ -48,11 +48,11 @@ public class PBookVO {
 	public String toString() {
 		
 		return "[회원번호= " + mnm
-				+ "이름= " + name
-				+ ", 전화번호= " + num
-				+ ", 주소= " + location
-				+ ", 그룹번호= " + gpno
-				+ ", 그룹명= " + gpnm + "]";				
+				+ " || 이름= " + name
+				+ " ||전화번호= " + num
+				+ " || 주소= " + location
+				+ " || 그룹번호= " + gpno
+				+ " || 그룹명= " + gpnm + "]";				
 	}
 	
 	

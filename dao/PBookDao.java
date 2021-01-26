@@ -170,10 +170,6 @@ public class PBookDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				pbvo.setMnm(rs.getString("mnm"));
-				pbvo.setName(rs.getString("name"));
-				pbvo.setNum(rs.getString("num"));
-				pbvo.setLocation(rs.getString("location"));
-				pbvo.setGpno(rs.getString("gpno"));
 				pbList.add(pbvo);
 			}
 			printPBook(pbList); 
@@ -185,7 +181,7 @@ public class PBookDao {
 			
 		}
 		
-		return ;
+		return mnm;
 	}
 	
 	public  int insertPBook(PBookVO pbvo) { // 신규연락처 추가
