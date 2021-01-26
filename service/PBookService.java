@@ -149,7 +149,7 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		String kb = null;
 		
 		selectAll();
-		pbcon.deletePBook_PrintSearchMnm();
+		pbcon.updatePBook_PrintSearchMnm();
 		kb = scanner.nextLine();
 		
 		int rowcnt = pbdao.deletePBook(kb);

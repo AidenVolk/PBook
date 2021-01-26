@@ -70,6 +70,10 @@ public class PBookController { // PBooK에 최상위 class
 		System.out.println();
 	}
 
+	public void insertPBook() {
+		int rowcnt = pbsrv.insertPBook();
+		pbv.insertPBook_Result(rowcnt);			
+	}
 	public void deletePBook() {
 		int rowcnt = pbsrv.deletePBook();
 		
