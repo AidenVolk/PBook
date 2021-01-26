@@ -145,11 +145,12 @@ public class PBookDao {
 		return pbList;
 	}
 		
-	public  void selectByMnm(String mnm) { // 회원 번호 검색
+	public  PBooKVO selectByMnm(String mnm) { // 회원 번호 검색
 		Connection con 				= getConnection();
 		PreparedStatement pstmt 	= null;
 		ResultSet rs 				= null;
 		ArrayList<PBookVO> pbList 	= new ArrayList<>();
+		PBookVO pbvo = new PBookVO();
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT f.mnm				");
@@ -168,7 +169,6 @@ public class PBookDao {
 			pstmt.setString(1, mnm);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				PBookVO pbvo = new PBookVO();
 				pbvo.setMnm(rs.getString("mnm"));
 				pbvo.setName(rs.getString("name"));
 				pbvo.setNum(rs.getString("num"));
@@ -184,13 +184,15 @@ public class PBookDao {
 			close(con, pstmt, rs);
 			
 		}
+		
+		return ;
 	}
 	
 	public  int insertPBook(PBookVO pbvo) { // 신규연락처 추가
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
 		StringBuilder sql 		= new StringBuilder();
-		int rowcnt = 0;
+		int rowcnt 				= 0;
 			
 		sql.append("INSERT INTO PBookf( mnm		");
 		sql.append("	              , name	");
@@ -224,6 +226,7 @@ public class PBookDao {
 	public  int deletePBook(PBookVO pbvo) { //연락처 삭제
 		Connection con 			= getConnection();
 		PreparedStatement pstmt = null;
+		int rowcnt 				= 0;
 		
 		StringBuilder sql = new StringBuilder();
 		
@@ -231,13 +234,10 @@ public class PBookDao {
 		sql.append("WHERE mnm = ?					");
 		
 		
-		int rowcnt = 0;
-		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, pbvo.getMnm());
 			rowcnt = pstmt.executeUpdate();
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -264,7 +264,7 @@ public class PBookDao {
 		sql.append("		,?				");
 		sql.append("		,?)				");
 		sql.append(" WHERE f.gpno = p.gpno	");
-		sql.append("   AND f.name = ?	 	");
+		sql.append("   AND f.mnm = ?	 	");
 		sql.append(";						");
 	
 		int rowcnt = 0;

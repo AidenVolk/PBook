@@ -133,19 +133,27 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 
 
 	public int deletePBook() {
+
 		PBookController pbcon = new PBookController();
 		String kb = null;
 		
+		
 		selectAll();
-		pbcon.deletePBook_PrintSearchName();
+		pbcon.deletePBook_PrintSearchMnm();
 		kb = scanner.nextLine();
-		selectByName(kb);
+		//selectByName(kb);
 		
 		
 		
 		int rowcnt = pbdao.deletePBook(pbvo);
 		
 		return rowcnt;
+	}
+	public int deletePBooK_Result() {
+		int rowcnt = pbdao.deletePBook(pbvo);
+		
+		return rowcnt;
+		
 	}
 	public int updatePBook() {
 		
@@ -194,8 +202,6 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		pbList = selectByName(name);
 		
 		return pbList;
-		
-		
 	}
 	
 }

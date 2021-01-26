@@ -85,7 +85,7 @@ public class PBookController { // PBooK에 최상위 class
 	public int deletePBook_Result() {
 		PBookService pbsrv = new PBookService();
 		
-		int rowcnt = pbsrv.deletePBook();
+		int rowcnt = pbsrv.deletePBooK_Result();
 		
 		return rowcnt;
 	}
@@ -133,9 +133,14 @@ public class PBookController { // PBooK에 최상위 class
 		System.out.println(							 );
 	}
 	
-	public void deletePBook_PrintSearchName() {
+	public void deletePBook_PrintSearchMnm() {
 		System.out.println();
-		System.out.println("삭제할 연락처의 이름을 입력해주세요.");
+		System.out.println("삭제할 연락처의 회원번호를 입력해주세요.");
+		System.out.println();
+	}
+	public void updatePBook_PrintSearchMnm() {
+		System.out.println();
+		System.out.println("수정할 연락처의 회원번호를 입력해주세요.");
 		System.out.println();
 	}
 	
