@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import controller.PBookController;
 import dao.PBookDao;
-import view.PBookView;
 import vo.PBookVO;
 
 
@@ -147,16 +146,11 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 		
 		
 	}
-//	public int deletePBooK_Result() {
-//		int rowcnt = pbdao.deletePBook(pbvo);
-//		
-//		return rowcnt;
-//		
-//	}
+
 	public int updatePBook() {
-		
-		int rowcnt = pbdao.updatePBook(pbvo);
-		
+		deletePBook();
+		insertPBook();
+	
 		return rowcnt;
 	}
 	
@@ -203,6 +197,11 @@ public class PBookService { // Controller class 와 Dao의 중간다리 역할 c
 	}
 	
 }
-	
+//public int deletePBooK_Result() {
+//int rowcnt = pbdao.deletePBook(pbvo);
+//
+//return rowcnt;
+//
+//}
 	
 

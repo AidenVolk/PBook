@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import service.PBookService;
 import vo.PBookVO;
 
 public class PBookDao {
@@ -228,7 +227,6 @@ public class PBookDao {
 		
 		sql.append("DELETE PBookf					");
 		sql.append("WHERE mnm = ?					");
-		
 		
 		try {
 			pstmt = con.prepareStatement(sql.toString());
