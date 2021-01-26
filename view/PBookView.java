@@ -12,9 +12,6 @@ public class PBookView { // 화면 출력을 위한 class
 	
 	public void insertPBook_Result(int rowcnt) {
 		pbvo 					= new PBookVO();
-		PBookController pbcon 	= new PBookController();
-		
-		pbcon.insertPBook_Result();
 		
 		if(rowcnt > 0) {
 			System.out.println("추가가 완료되었습니다.");
@@ -25,7 +22,6 @@ public class PBookView { // 화면 출력을 위한 class
 	}
 	public void deletePBook_Result(int rowcnt) {
 		pbvo 					= new PBookVO();
-		PBookController pbcon  	= new PBookController();
 		
 		if(rowcnt > 0) {
 			System.out.println("삭제가 완료되었습니다.");
@@ -34,9 +30,6 @@ public class PBookView { // 화면 출력을 위한 class
 		}
 	}
 	public void updatePBook_Result(int rowcnt) {
-		PBookController pbcon  = new PBookController();
-		
-		pbcon.updatePBook_result();
 		
 		if(rowcnt > 0) {
 			System.out.println("정상적으로 수정되었습니다.");
@@ -44,14 +37,6 @@ public class PBookView { // 화면 출력을 위한 class
 			System.out.println("수정 오류");
 		}
 	}
-	
-//	public void selectByName() {
-//		PBookController pbcon = new PBookController();
-//		pbList = new ArrayList<>();
-//		ArrayList<PBookVO> pbList = pbcon.selectByName();
-//		System.out.println(pbList);
-//		
-//	}
 	
 	public void selectAll(ArrayList<PBookVO> pbList) {
 	

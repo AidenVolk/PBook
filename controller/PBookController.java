@@ -68,33 +68,87 @@ public class PBookController { // PBooK에 최상위 class
 		System.out.println("1,2,3 중 하나를 택해야합니다.");
 		System.out.println();
 	}
-	
-	
-	public void insertPBook_Result(){
-		PBookService pbsrv = new PBookService();
-		PBookView pbv = new PBookView();
-		
-		int rowcnt = pbsrv.insertPBook();
-		
-		pbv.insertPBook_Result(rowcnt);
-		
-		
-	}
-	public void deletePBook_Result() {
-		PBookService pbsrv 	= new PBookService();
-		int rowcnt 			= pbsrv.deletePBook();
 
-		pbv.deletePBook_Result(rowcnt);
-
-	}
-	public int updatePBook_result() {
-		PBookService pbsrv = new PBookService();
-		
-		int rowcnt = pbsrv.updatePBook();
-		
-		return rowcnt;
-	}
+	public void start() {
+	PBookService pbsrv = new PBookService();
 	
+	pbsrv.printMenu();
+	}
+	public void printMenu(){
+	System.out.println(					 		 );
+	System.out.println("-------------			");
+	System.out.println("1. 회원추가    			");
+	System.out.println("-------------			");
+	System.out.println("2. 회원 목록				");
+	System.out.println("-------------			");
+	System.out.println("3. 연락처 수정    			");
+	System.out.println("-------------			");
+	System.out.println("4. 회원 삭제      			");
+	System.out.println("-------------			");
+	System.out.println("5. 프로그램 종료			");
+	System.out.println("-------------			");
+	System.out.println("원하시는 번호를 입력하세요(1-5)");
+	System.out.println(							 );
+}
+
+	public void deletePBook_PrintSearchMnm() {
+	System.out.println();
+	System.out.println("삭제할 연락처의 회원번호를 입력해주세요.");
+	System.out.println();
+}
+	public void updatePBook_PrintSearchMnm() {
+	System.out.println();
+	System.out.println("수정할 연락처의 회원번호를 입력해주세요.");
+	System.out.println();
+}
+
+	public void printMenu_Error() {
+	System.out.println();
+	System.out.println("잘못 입력하셨습니다. 다시 입력해주세요>>");
+	System.out.println();
+}
+	public void exit() {
+	System.out.println();
+	System.out.println("프로그램을 종료합니다");
+	System.out.println();
+}
+	public void nobody() {
+	System.out.println();
+	System.out.println("현재 저장된 연락처가 없습니다.");
+	System.out.println();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+//	public void insertPBook_Result(){
+//		PBookService pbsrv = new PBookService();
+//		PBookView pbv = new PBookView();
+//		
+//		int rowcnt = pbsrv.insertPBook();
+//		
+//		pbv.insertPBook_Result(rowcnt);
+//		
+//		
+//	}
+//	public void deletePBook_Result() {
+//		PBookService pbsrv 	= new PBookService();
+//		int rowcnt 			= pbsrv.deletePBook();
+//
+//		pbv.deletePBook_Result(rowcnt);
+//
+//	}
+//public int updatePBook_result() {
 
 	
 //	public ArrayList<PBookVO> selectByName() {
@@ -108,55 +162,6 @@ public class PBookController { // PBooK에 최상위 class
 //		
 //		return pbList;
 //	}
-	
-	public void start() {
-		PBookService pbsrv = new PBookService();
-		
-		pbsrv.printMenu();
-	}
-	public void printMenu(){
-		System.out.println(					 		 );
-		System.out.println("-------------			");
-		System.out.println("1. 회원추가    			");
-		System.out.println("-------------			");
-		System.out.println("2. 회원 목록				");
-		System.out.println("-------------			");
-		System.out.println("3. 연락처 수정    			");
-		System.out.println("-------------			");
-		System.out.println("4. 회원 삭제      			");
-		System.out.println("-------------			");
-		System.out.println("5. 프로그램 종료			");
-		System.out.println("-------------			");
-		System.out.println("원하시는 번호를 입력하세요(1-5)");
-		System.out.println(							 );
-	}
-	
-	public void deletePBook_PrintSearchMnm() {
-		System.out.println();
-		System.out.println("삭제할 연락처의 회원번호를 입력해주세요.");
-		System.out.println();
-	}
-	public void updatePBook_PrintSearchMnm() {
-		System.out.println();
-		System.out.println("수정할 연락처의 회원번호를 입력해주세요.");
-		System.out.println();
-	}
-	
-	public void printMenu_Error() {
-		System.out.println();
-		System.out.println("잘못 입력하셨습니다. 다시 입력해주세요>>");
-		System.out.println();
-	}
-	public void exit() {
-		System.out.println();
-		System.out.println("프로그램을 종료합니다");
-		System.out.println();
-	}
-	public void nobody() {
-		System.out.println();
-		System.out.println("현재 저장된 연락처가 없습니다.");
-		System.out.println();
-	}
 
 	
 	
